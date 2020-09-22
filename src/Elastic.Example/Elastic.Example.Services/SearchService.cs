@@ -90,6 +90,9 @@ namespace Elastic.Example.Services
         public SearchServiceResults Search(CommonSearchRequest searchRequest)
         {
             var filteringQuery = CreateCommonFilter(searchRequest);
+            
+            // var dsl = _client.RequestResponseSerializer.SerializeToString(filteringQuery);
+            // Console.WriteLine(dsl);
 
             const int titleBoost = 15;
             const int keywordBoost = 45;

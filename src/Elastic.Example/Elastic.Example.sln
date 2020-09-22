@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{C0BE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elastic.Example.Search.Console", "Elastic.Example.Search.Console\Elastic.Example.Search.Console.csproj", "{7725EA49-7EB6-449F-94C9-F12F84DC4C49}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{247AF30D-C5BE-4742-97C3-B2793DC56791}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elastic.Example.Search.WebApi", "Elastic.Example.Search.WebApi\Elastic.Example.Search.WebApi.csproj", "{F06B894B-895D-4E75-B3F0-2099C7711CE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{7725EA49-7EB6-449F-94C9-F12F84DC4C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7725EA49-7EB6-449F-94C9-F12F84DC4C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7725EA49-7EB6-449F-94C9-F12F84DC4C49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F06B894B-895D-4E75-B3F0-2099C7711CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F06B894B-895D-4E75-B3F0-2099C7711CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F06B894B-895D-4E75-B3F0-2099C7711CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F06B894B-895D-4E75-B3F0-2099C7711CE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +63,7 @@ Global
 		{A918F0D0-6EC5-45E8-A9BF-9C0679A31BD9} = {C0BE1A79-C0E8-4C5B-A930-7B6C624A4B7C}
 		{9EB4937F-C0B6-4565-BAC1-60C42CA5B76D} = {C0BE1A79-C0E8-4C5B-A930-7B6C624A4B7C}
 		{7725EA49-7EB6-449F-94C9-F12F84DC4C49} = {C0BE1A79-C0E8-4C5B-A930-7B6C624A4B7C}
+		{F06B894B-895D-4E75-B3F0-2099C7711CE9} = {247AF30D-C5BE-4742-97C3-B2793DC56791}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A050CEE3-6316-4147-8071-00864F3EB46D}
