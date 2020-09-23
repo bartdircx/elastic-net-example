@@ -5,9 +5,12 @@ using Elastic.Example.Services.Mappings.NestedTypes;
 using Nest;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Elasticsearch.Net;
+using Newtonsoft.Json;
 
 namespace Elastic.Example.Services
 {
@@ -87,12 +90,39 @@ namespace Elastic.Example.Services
             return type;
         }
 
+        public SearchServiceResults GetActors(CommonSearchRequest searchRequest)
+        {
+            var results = _client.Search<ActorSearchItem>(s => s
+                .From(searchRequest.Skip)
+                .Size(searchRequest.PageSize)
+                .Index("actor")
+                .Source(src => src.Includes(i => i.Field("Title")))
+                .Type("actorsearchitem")
+                .Query(q => q
+                    .Bool(b => b
+                        .Name(searchRequest.Query)))
+            );
+            
+            var searchResult = new SearchServiceResults()
+            {
+                TotalResults = (int)results.Total,
+                DebugInformation = results.DebugInformation,
+                OriginalQuery = searchRequest.Query
+            };
+
+            foreach (var hit in results.Hits)
+            {
+                var relatedDocument = results.Documents.FirstOrDefault(p => p.Id == hit.Id);
+                relatedDocument.PostProcess(hit.Highlights);
+                searchResult.Items.Add(relatedDocument);
+            }
+
+            return searchResult;
+        }
+        
         public SearchServiceResults Search(CommonSearchRequest searchRequest)
         {
             var filteringQuery = CreateCommonFilter(searchRequest);
-            
-            // var dsl = _client.RequestResponseSerializer.SerializeToString(filteringQuery);
-            // Console.WriteLine(dsl);
 
             const int titleBoost = 15;
             const int keywordBoost = 45;
@@ -153,6 +183,16 @@ namespace Elastic.Example.Services
             }
 
             return searchResult;
+        }
+
+        private static void DslDebug(Stream dsl)
+        {
+            var serializer = new JsonSerializer();
+            using (var sr = new StreamReader(dsl))
+            using (var jsonTextReader = new JsonTextReader(sr))
+            {
+                Console.WriteLine(serializer.Deserialize(jsonTextReader));
+            }
         }
 
         private BoolQuery CreateCommonFilter(CommonSearchRequest searchRequest)
